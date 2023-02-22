@@ -16,6 +16,17 @@
   transform: translateX(-10px);
 }
 
+.avatar_mask_profile {
+  width: 90px;
+  height: 90px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.avatar_mask_profile img {
+  height: 90px;
+}
+
 .card-header a {
   color: #444;
 }
