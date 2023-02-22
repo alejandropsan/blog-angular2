@@ -1,0 +1,68 @@
+<div class="col-md-12 mt-4">
+  <h1>{{ pageTitle }}</h1>
+  <p *ngIf="status != 'success'">
+    Modifica los datos de tu perfil de usuario.
+  </p>
+
+  <hr>
+  <div class="alert alert-success col-md-5 mt-3" *ngIf="status == 'success'">
+    El perfil se ha actualizado correctamente...
+  </div>
+
+  <div class="alert alert-danger col-md-5 mt-3" *ngIf="status == 'error'">
+    Los datos no se han podido actualizar, vuelve a intentarlo o prueba más tarde.
+  </div>
+
+  <!-- FORMULARIO DE AJUSTES -->
+  <form action="" class="col-md-5 ml-0 pl-0" #userEditForm="ngForm" (ngSubmit)="onSubmit(userEditForm)">
+    <div class="form-group mt-3">
+      <label for="name">Nombre</label>
+      <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="user.name" required pattern="[a-z A-Z]+">
+      <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+        El nombre no es válido
+      </small>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="surname">Apellidos</label>
+      <input type="text" name="surname" class="form-control" #surname="ngModel" [(ngModel)]="user.surname" required pattern="[a-zà-ÿ A-ZÀ-ÿ]+">
+      <small *ngIf="!surname.valid && surname.touched" class="invalid-feedback d-block">
+        Los apellidos no son válidos
+      </small>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="email">Email</label>
+      <input type="email" name="email" class="form-control" #email="ngModel" [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+      <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+        El email no es válido
+      </small>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="description">Bio</label>
+      <textarea [froalaEditor]="froala_options" [(froalaModel)]="user.description" name="description" class="form-control" #description="ngModel" [(ngModel)]="user.description"></textarea>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="image">Avatar</label>
+
+      <div *ngIf="identity && identity.image">
+        <img src="{{ url + 'user/avatar/' + identity.image }}" alt="Imagen avatar" class="avatar-edit"/>
+      </div>
+
+      <angular-file-uploader
+      [config]="afuConfig"
+      [resetUpload]=true
+      (ApiResponse)="avatarUpload($event)">
+      </angular-file-uploader>
+    </div>
+
+
+    <input type="submit" value="Guardar cambios" class="btn btn-success mt-3" [disabled]="userEditForm.invalid">
+
+  </form>
+  <br>
+
+</div>
+

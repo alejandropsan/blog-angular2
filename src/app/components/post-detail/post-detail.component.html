@@ -1,0 +1,25 @@
+
+<div class="col-md-12 post-detail" *ngIf="!post">
+  Cargando...
+</div>
+<div class="col-md-12 post-detail" *ngIf="post">
+    <div class="card post-card-detail">
+      <div class="card-header" id="post-title">
+        <h1>{{ pageTitle }}</h1>
+        <hr>
+        <h2 class="">{{ post.title }}</h2>
+        <br>
+        <p>
+          {{ post.category.name }} - <a [routerLink]="['/perfil', post.user.id]">
+          {{ post.user.name + post.user.surname }}</a>
+        </p>
+      </div>
+
+      <br>
+      <div class="card-body post-body">
+        <p [innerHTML]="post.content"></p>
+      </div>
+      <br>
+
+    </div>
+</div>

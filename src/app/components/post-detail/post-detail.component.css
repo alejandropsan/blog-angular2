@@ -1,0 +1,47 @@
+.post-detail {
+  margin-top: 30px;
+}
+
+#post-title h1 {
+  background-color: rgba(88, 110, 131, 0.705);
+  color: azure;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#post-title h2 {
+  color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#post-title p {
+  color: #333;
+}
+
+div .card .post-detail-card {
+  background-color: antiquewhite;
+}
+
+.post-body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 18px;
+
+}
+div .card {
+  border-radius: 20px;
+  overflow: hidden;
+
+  background-color: rgba(168, 202, 230, 0.479);
+}
+
+div .card-header {
+  background-color: whitesmoke;
+
+}
+
+div .card-body {
+  background-color: aliceblue;
+}

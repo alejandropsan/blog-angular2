@@ -1,0 +1,74 @@
+<div class="col-md-12 mt-4">
+  <h1>{{ pageTitle }}</h1>
+  <p *ngIf="!is_edit">
+    Crea un nuevo Post para el blog en la categoría que elijas.
+  </p>
+
+  <p class="new-post-title" *ngIf="is_edit && post">
+    Aquí puedes editar el Post <strong>{{ post.title }}</strong> y configurarlo como quieras.
+  </p>
+
+  <hr>
+
+  <!-- INICIO MENSAJES DE ALERTA -->
+  <div class="alert alert-success col-md-5 mt-3" *ngIf="status == 'success'">
+    Se ha creado un nuevo Post...
+  </div>
+
+  <div class="alert alert-danger col-md-5 mt-3" *ngIf="status == 'error'">
+    El nuevo Post no se ha podido crear, vuelve a intentarlo o prueba más tarde.
+  </div>
+<!-- FIN MENSAJES DE ALERTA -->
+
+<!-- INICIO FORMULARIO DE POSTS -->
+<form class="col-md-5 ml-0 pl-0" #postNew="ngForm" (ngSubmit)="onSubmit(postNew)">
+
+  <div class="form-group">
+    <label for="title">Título del nuevo Post</label>
+    <input type="text" name="title" #title="ngModel" [(ngModel)]="post.title" class="form-control" required>
+
+    <small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">
+      El título no es válido.
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="content">Contenido del Post</label>
+    <textarea [froalaEditor]="froala_options" name="content" #content="ngModel" [(ngModel)]="post.content"></textarea>
+    <small *ngIf="!content.valid && content.touched" class="invalid-feedback d-block">
+      Revisa el contenido. No es válido.
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="category_id">Categoría</label>
+    <select name="category_id" #category="ngModel" [(ngModel)]="post.category_id" class="form-control">
+      <option *ngFor="let category of categories" value="{{ category.id }}">
+        {{ category.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="image">Imagen del Post</label>
+    <div *ngIf="is_edit && post.image">
+      <img src="{{ url + 'post/image/' + post.image }}" alt="Imagen avatar" class="avatar-edit"/>
+    </div>
+    <angular-file-uploader
+      [config]="afuConfig"
+      [resetUpload]="true"
+      (ApiResponse)="imageUpload($event)">
+    </angular-file-uploader>
+  </div>
+
+  <input type="submit" value="Guardar" class="btn btn-success" [disabled]="postNew.invalid">
+</form>
+
+<br>
+
+
+<!-- FIN FORMULARIO DE POSTS -->
+
+  <br>
+
+</div>
